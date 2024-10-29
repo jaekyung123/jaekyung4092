@@ -4,6 +4,7 @@ from common.forms import UserForm
 
 
 def signup(request):
+    3/0
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
