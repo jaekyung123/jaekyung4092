@@ -133,6 +133,9 @@ LOGIN_REDIRECT_URL = '/'
 # 로그아웃시 이동하는 URL
 LOGOUT_REDIRECT_URL = '/'
 
+
+
+# 로깅설정
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -150,8 +153,8 @@ LOGGING = {
             'format': '[{server_time}] {message}',
             'style': '{',
         },
-        'standard': {
-            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+'standard': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
         },
     },
     'handlers': {
@@ -174,8 +177,8 @@ LOGGING = {
             'level': 'INFO',
             'filters': ['require_debug_false'],
             'class': 'logging.handlers.RotatingFileHandler',
-            'filename': BASE_DIR / 'logs' / 'logs/mysite.log',
-            'maxBytes': 1024 * 1024 * 5,
+            'filename': BASE_DIR / 'logs/mysite.log',
+            'maxBytes': 1024*1024*5,  # 5 MB
             'backupCount': 5,
             'formatter': 'standard',
         },
