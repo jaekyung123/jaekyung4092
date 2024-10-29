@@ -153,7 +153,7 @@ LOGGING = {
             'format': '[{server_time}] {message}',
             'style': '{',
         },
-'standard': {
+    'standard': {
             'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
         },
     },
@@ -192,6 +192,10 @@ LOGGING = {
             'handlers': ['django.server'],
             'level': 'INFO',
             'propagate': False,
+        },
+        'pybo': {
+            'handlers': ['console', 'file'],
+            'level': 'INFO',
         },
     }
 }
