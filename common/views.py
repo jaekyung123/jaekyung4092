@@ -4,7 +4,6 @@ from common.forms import UserForm
 
 
 def signup(request):
-    3/0
     if request.method == "POST":
         form = UserForm(request.POST)
         if form.is_valid():
@@ -19,3 +18,4 @@ def signup(request):
     return render(request, 'common/signup.html', {'form': form})
 def page_not_found(request, exception):
     return render(request, 'common/404.html', {})
+
