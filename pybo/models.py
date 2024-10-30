@@ -22,3 +22,10 @@ class Answer(models.Model):
     modify_date = models.DateTimeField(null=True, blank=True)
     voter = models.ManyToManyField(User, related_name='voter_answer')
 
+class photo(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='images/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
