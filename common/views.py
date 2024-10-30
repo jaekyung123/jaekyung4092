@@ -1,9 +1,10 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
 from common.forms import UserForm
-from django.shortcuts import render, redirect
 
-
+def logout_view(request):
+    logout(request)
+    return redirect('index')
 
 def signup(request):
     if request.method == "POST":
@@ -18,6 +19,6 @@ def signup(request):
     else:
         form = UserForm()
     return render(request, 'common/signup.html', {'form': form})
+
 def page_not_found(request, exception):
     return render(request, 'common/404.html', {})
-

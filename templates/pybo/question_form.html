@@ -1,10 +1,22 @@
 {% extends 'base.html' %}
+
 {% block content %}
 <div class="container">
     <h5 class="my-3 border-bottom pb-2">질문등록</h5>
-    <form method="post" class="post-form my-3">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
-        {% include "form_errors.html" %}
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+                {% if field.errors %}
+                    <div>
+                        <strong>{{ field.label }}</strong>
+                        {{ field.errors }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
         <div class="mb-3">
             <label for="subject" class="form-label">제목</label>
             <input type="text" class="form-control" name="subject" id="subject"
@@ -15,7 +27,35 @@
             <textarea class="form-control" name="content"
                       id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
         </div>
+
+        <!-- 이미지 선택 및 미리보기 영역 -->
+        <label for="imageInput" class="btn btn-primary">이미지 선택</label>
+        <input type="file" id="imageInput" name="image" accept="image/*" style="display: none;">
+
+        <div id="imagePreview" style="margin-top: 10px;">
+            <img id="preview" src="" alt="미리보기 이미지" style="display: none; max-width: 100%; height: auto;">
+        </div>
+
         <button type="submit" class="btn btn-primary">저장하기</button>
     </form>
+
+    <script>
+        // 이미지 선택 시 미리보기 생성
+        const imageInput = document.getElementById("imageInput");
+        const preview = document.getElementById("preview");
+
+        imageInput.addEventListener("change", function(event) {
+            const file = event.target.files[0];
+
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = "block";
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 </div>
 {% endblock %}
