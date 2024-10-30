@@ -2,7 +2,8 @@ from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect
 from common.forms import UserForm
 from django.shortcuts import render, redirect
-from .forms import PhotoForm
+
+
 
 def signup(request):
     if request.method == "POST":
@@ -20,12 +21,3 @@ def signup(request):
 def page_not_found(request, exception):
     return render(request, 'common/404.html', {})
 
-def photo_upload(request):
-    if request.method == 'POST':
-        form = PhotoForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('photo_list')
-    else:
-        form = PhotoForm()
-    return render(request, 'upload.html', {'form':form})

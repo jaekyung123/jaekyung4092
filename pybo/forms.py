@@ -1,6 +1,6 @@
 from django import forms
 from pybo.models import Question, Answer
-from .models import photo
+
 
 class QuestionForm(forms.ModelForm):
     class Meta:
@@ -20,7 +20,3 @@ class AnswerForm(forms.ModelForm):
             'content': '답변내용',
         }
 
-class PhotoForm(forms.ModelForm):
-    class Meta:
-        model = photo
-        fields = ['title', 'image']
